@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "/Users/lberanger/omega-topology-taxonomy"
+		}
+	],
+	"settings": {
+		"python.pythonPath":"~/.envs/omega-topology-taxonomy/bin/python"
+	}
+}
