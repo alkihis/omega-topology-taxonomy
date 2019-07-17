@@ -1,6 +1,12 @@
 from ete3 import NCBITaxa
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--port", type=int, default=3278, help="Port")
+
+program_args = parser.parse_args()
 
 """
 Convert a TreeNodeObject returned by NCBITaxa to a dictionary (filled by reference)
@@ -106,4 +112,4 @@ def server_error(e):
     return jsonify(success=False, reason="Unexpected internal server error", error=repr(e)), 500
 
 # Run integrated Flask server
-app.run(host='0.0.0.0', port=3278)
+app.run(host='0.0.0.0', port=program_args.port)
