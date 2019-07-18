@@ -27,6 +27,11 @@ CORS(app)
 
 term_cache = {}
 
+"""
+Respond a JSON containing the organisms name of the given taxids.
+@expecting HTTP POST; Content-Type: application/json; Body: { "term" [:listofIDs] }
+@returns JSON response; Body: { success: true, terms: TermsObj }; TermsObj as { [taxId: string]: string }
+"""
 @app.route('/term', methods=['POST'])
 def get_term_of():
     if not request.is_json:
