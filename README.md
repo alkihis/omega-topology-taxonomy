@@ -8,6 +8,7 @@ Compute a minimal tree according to some taxonomic ids, or give terms related to
 
 ## Installation
 
+Simply clone the repo, then setup the virtual environnement.
 ```bash
 git clone https://github.com/alkihis/omega-topology-taxonomy.git
 mkdir ~/.envs
@@ -15,6 +16,21 @@ virtualenv --python=/usr/bin/python3.6 ~/.envs/omega-topology-taxonomy
 cd omega-topology-taxonomy
 source ~/.envs/omega-topology-taxonomy/bin/activate
 pip3 install flask ete3 flask-cors
+deactivate
+```
+
+In order to use properly the service, you need to force ete3 to generate taxonomy database:
+```bash
+# Enter virtual env
+source ~/.envs/omega-topology-taxonomy/bin/activate
+# Create script
+echo "from ete3 import NCBITaxa
+ncbi = NCBITaxa()
+ncbi.update_taxonomy_database()" > init.py
+# Run script then remove it
+python init.py
+rm init.py
+# Exit virtualenv
 deactivate
 ```
 
