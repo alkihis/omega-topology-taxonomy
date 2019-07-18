@@ -59,7 +59,7 @@ Body must be JSON-formatted, and contain a object with one key `term`, linked to
 ```
 
 ### POST /tree
-Get the minimal tree needed to link the multiple taxonomic together.
+Get the minimal tree needed to link the multiple taxonomic ids together.
 
 Body must be JSON-formatted, and contain a object with one key `taxids`, linked to an array of stringified taxonomic ids.
 
