@@ -30,7 +30,7 @@ ncbi.update_taxonomy_database()" > init.py
 # Run script then remove it
 python init.py
 rm init.py
-# Exit virtualenv
+# Exit virtual env
 deactivate
 ```
 
