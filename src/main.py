@@ -52,19 +52,24 @@ def get_term_of():
     if isinstance(data['term'], str):
         data['term'] = [data['term']]
 
+    if not len(data['term']):
+        return jsonify(success=False, reason="List of desired ID is empty"), 400
+
     for term in data['term']:
         if term in term_cache:
             terms[term] = term_cache[term]
         else:
-            taxnames = ncbi.get_taxid_translator([int(term)])
+            try:
+                taxnames = ncbi.get_taxid_translator([int(term)])
+            except:
+                taxnames = []
+
             if len(taxnames) > 0:
                 for term_fetched in taxnames:
                     terms[str(term_fetched)] = term_cache[str(term_fetched)] = taxnames[term_fetched]
             else:
                 # No term!
                 return jsonify(success=False, reason="Term not found"), 404
-        
-
 
     return jsonify(success=True, terms=terms)
 
@@ -89,6 +94,9 @@ def get_taxo_of():
 
     ncbi = NCBITaxa() # Obligé de l'instancier à chaque requête; Requiert un SQLite qui demande un thread ID == thread appelant
     sended_list = data['taxids']
+
+    if not len(sended_list):
+        return jsonify(success=False, reason="Query list is empty"), 400
 
     # Convert every string ID of the list to integers
     # Map returns an iterator, so the value error will not append when creating it
